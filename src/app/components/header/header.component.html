@@ -1,0 +1,27 @@
+<header class="header">
+  <nav>
+    <!--------------------- Version Mobile --------------------->
+    <button class="sandwich-menu" type="button" (click)="toggleSideMenu()">
+      <img src="assets/menu.svg" alt="menu">
+    </button>
+    <div class="side-menu" [class.open]="openSideMenu">
+      <button type="button" (click)="toggleSideMenu()">
+        <img src="assets/close.svg" alt="close">
+      </button>
+      <ul>
+        <li *ngFor="let route of routes">
+          <a [href]="route.path">{{route.name}}</a>
+        </li>
+      </ul> 
+    </div>
+    <!--------------------- Version PC --------------------->
+
+    <a href="#" class="logo">no.clipped</a>
+    <ul class="hide-menu">
+      <li *ngFor="let route of routes">
+        <a [href]="route.path">{{route.name}}</a>
+      </li>
+    </ul> 
+    <img src="assets/cart.svg" alt="cart">
+  </nav>
+</header>
