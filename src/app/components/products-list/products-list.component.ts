@@ -88,11 +88,11 @@ export class ProductsListComponent {
     
   }
 
-  ngOnInit(): void {
+  OnInit(): void {
     this.productsService.getFakeProducts()
       .subscribe((products) => {
         console.log(products);
           this.products = products;
       });
-  };
+  }
 }

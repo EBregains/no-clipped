@@ -12,8 +12,8 @@ import { Route } from '../../model/route.model';
 
 export class HeaderComponent {
 
-  openSideMenu: boolean = false;
-  numProductsOnCart: number = 0;
+  openSideMenu = false;
+  numProductsOnCart = 0;
   routes: Route[] = [
     {
       path: '/products',
@@ -33,12 +33,12 @@ export class HeaderComponent {
     private storeService: StoreService,
   ) {}
 
-  ngOnInit() {
+  OnInit() {
     this.storeService.myCart$.subscribe((cart) => {
       this.numProductsOnCart = cart.length;
     });
   }
-  
+
   toggleSideMenu() {
     this.openSideMenu = !this.openSideMenu;
   }
