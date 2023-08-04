@@ -1,6 +1,17 @@
+<!-------------------- PRODUCT CARD -------------------->
 <div class="product--container">
-  <img [src]="product.image" [alt]="product.description">
-  <h2>{{product.title}}</h2>
-  <p>{{product.price}}</p>
-  <button (click)="addToCart()">Add to cart</button>
+  <!-- image -->
+  <div class="product-image">
+    <img [src]="product.images[0]" [alt]="product.description">
+  </div>
+  <!-- details -->
+  <div class="product-details">
+    <h2 class="product-name">{{product.title}}</h2>
+    <p class="product-price">{{product.price | currency}}</p>
+    <!-- button group -->
+    <div class="product-actions">
+      <button (click)="addToCart()">Add to cart</button>
+      <button (click)="viewQuickDetails()">Quick look</button>
+    </div>
+  </div>
 </div>

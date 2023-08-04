@@ -16,16 +16,16 @@ export class HeaderComponent {
   numProductsOnCart = 0;
   routes: Route[] = [
     {
-      path: '/products',
-      name: 'Products',
+      path: '/productos',
+      name: 'Productos',
     },
     {
-      path: '/contact-us',
-      name: 'Contact',
+      path: '/contacto',
+      name: 'Contacto',
     },
     {
-      path: '/about-us',
-      name: 'About Us',
+      path: '/acerca',
+      name: 'Conocenos',
     },
   ];
 
@@ -33,7 +33,7 @@ export class HeaderComponent {
     private storeService: StoreService,
   ) {}
 
-  OnInit() {
+  ngOnInit() {
     this.storeService.myCart$.subscribe((cart) => {
       this.numProductsOnCart = cart.length;
     });

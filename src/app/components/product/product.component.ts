@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Product } from '../../model/product.model';
+import { Product, emptyProduct } from '../../model/product.model';
 
 @Component({
   selector: 'app-product',
@@ -9,17 +9,15 @@ import { Product } from '../../model/product.model';
 })
 export class ProductComponent {
 
-  @Input() product: Product = {
-    id: 0,
-    title: 'default',
-    price: 0,
-    image: 'default',
-    description: 'default',
-    category: 'default'
-  };
+  @Input() product: Product = emptyProduct;
 
   @Output() addedProduct = new EventEmitter<Product>();
+  @Output() viewDetails = new EventEmitter<string>();
   
+  viewQuickDetails() {
+    this.viewDetails.emit(this.product.id);
+  }
+
   addToCart() {
     this.addedProduct.emit(this.product);
   }

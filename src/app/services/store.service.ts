@@ -16,6 +16,7 @@ export class StoreService {
   addToCart(product: Product) {
     this.shoppingCart.push(product);
     this.myCart.next(this.shoppingCart);
+    console.log('from store.service: ', this.getTotal);
   }
 
   get getTotal() {

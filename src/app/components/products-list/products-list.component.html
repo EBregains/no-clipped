@@ -1,7 +1,32 @@
+
+<!---------------------------- MAIN GRID ---------------------------->
 <div class="products--grid">
   <app-product 
     [product]="product"
     *ngFor="let product of products"
     (addedProduct)="addToShoppingCart($event)"
+    (viewDetails)="onQuickView($event)"
   ></app-product>
+  <!-- load more card -->
+  <div class="load-more">
+    <button type="button" (click)="loadMore()"> More Products +</button>
+  </div>
+</div>
+<!---------------------- QUICK VIEW SIDE PANEL ---------------------->
+<div class="product-detail" [class.open]="openProductDetails">
+  <button type="button" class="g-icon-button" (click)="closeProductDetails()">
+    <img src="assets/close.svg" alt="close">
+  </button>
+  <!-- carrusel of images -->
+  <div class="product-images">
+    <div *ngFor="let image of selectedProduct.images" class="product-image">
+      <img [src]="image" alt="imagen del producto" >
+    </div>
+  </div>
+  <!-- product info -->
+  <div class="product-info">
+    <h1>{{selectedProduct.title}}</h1>
+    <p>{{selectedProduct.description}}</p>
+    <p>{{selectedProduct.price}}</p>
+  </div>
 </div>

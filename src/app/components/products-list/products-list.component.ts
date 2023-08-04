@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { ProductsService } from '../../services/products.service';
-import { Product } from '../../model/product.model';
+import { Product, emptyProduct } from '../../model/product.model';
 
 @Component({
   selector: 'app-products-list',
@@ -11,75 +11,43 @@ import { Product } from '../../model/product.model';
 export class ProductsListComponent {
 
   shoppingCart: Product[] = [];
-  products: Product[] = [
-  //   {
-  //     id: 1,
-  //     name: 'Phone XL',
-  //     price: 799,
-  //     description: 'A large phone with one of the best screens',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Phone Mini',
-  //     price: 699,
-  //     description: 'A great phone with one of the best cameras',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Phone Standard',
-  //     price: 299,
-  //     description: '',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Phone XL',
-  //     price: 799,
-  //     description: 'A large phone with one of the best screens',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     id: 5,
-  //     name: 'Phone Mini',
-  //     price: 699,
-  //     description: 'A great phone with one of the best cameras',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     id: 6,
-  //     name: 'Phone Standard',
-  //     price: 299,
-  //     description: '',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     id: 7,
-  //     name: 'Phone XL',
-  //     price: 799,
-  //     description: 'A large phone with one of the best screens',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     id: 8,
-  //     name: 'Phone Mini',
-  //     price: 699,
-  //     description: 'A great phone with one of the best cameras',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     id: 9,
-  //     name: 'Phone Standard',
-  //     price: 299,
-  //     description: '',
-  //     image: 'https://via.placeholder.com/150'
-  //   }
-   ];
+  products: Product[] = [];
+  selectedProduct: Product = emptyProduct;
+
+  // List Pageing sysytem
+  page = 0;
+  pageSize = 9;
+  collectionSize = this.products.length;
+
+  // booleans 
+  openProductDetails = false; 
+
+  loadMore() {
+    this.page += 1;
+    this.productsService.getFakeProductsOffset(this.pageSize, this.page * this.pageSize)
+      .subscribe((products) => {
+        this.products = this.products.concat(products);
+      });
+  }
 
   addToShoppingCart(product: Product) {
     this.storeService.addToCart(product);
   }
+
+  closeProductDetails() {
+    this.openProductDetails = false;
+    this.selectedProduct = emptyProduct;
+  }
+
+  onQuickView(id: string) {
+    this.productsService.getFakeProduct(id)
+    .subscribe((product) => {
+      this.selectedProduct = product;
+    });
+    this.openProductDetails = true;
+  }
+
+
 
   constructor(
     private storeService: StoreService,
@@ -88,8 +56,8 @@ export class ProductsListComponent {
     
   }
 
-  OnInit(): void {
-    this.productsService.getFakeProducts()
+  ngOnInit(): void {
+    this.productsService.getFakeProductsOffset(this.pageSize, this.page * this.pageSize)
       .subscribe((products) => {
         console.log(products);
           this.products = products;

@@ -7,20 +7,8 @@ nav {
   background-color: var(--black);
   .sandwich-menu {
     display: none;
-    width: 32px;
-    height: 32px;
-    background: none;
     border-radius: 4px;
     border-color: white;
-    padding: 2px;
-    img {
-      width: 24px;
-      height: 24px;
-    }
-  }
-  .logo {
-    text-decoration: none;
-    color: white;
   }
   ul {
     display: flex;
@@ -34,13 +22,6 @@ nav {
         color: var(--white);
       }
     }
-  }
-  .counter {
-    color: white;
-  }
-  img {
-    width: 32px;
-    height: 32px;
   }
   .side-menu {
     display: flex;
@@ -73,17 +54,39 @@ nav {
       }
     }
     button {
-      width: 32px;
-      height: 32px;
       background: none;
       border-color: white;
       border-radius: 50%;
       cursor: pointer;
-      padding: 2px;
-      img{
-        width: 24px;
-        height: 24px;
-      }
+    }
+  }
+}
+
+.cart {
+  height: 32px;
+  border: none;
+  padding: 0;
+  button{
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    img {
+      width: 28px;
+      height: 28px;
+    }
+    .counter {
+      position: relative;
+      top: -20px;
+      left: 16px;
+      background-color: var(--contrast);
+      color: var(--white);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
