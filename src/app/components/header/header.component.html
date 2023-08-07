@@ -1,9 +1,10 @@
 <header class="header">
   <nav>
-    <!--------------------- Version Mobile --------------------->
+    <!--------------------- SANDIWCH MENU --------------------->
     <button class="g-icon-button sandwich-menu" type="button" (click)="toggleSideMenu()">
       <img src="assets/menu.svg" alt="menu">
     </button>
+    <!-- side menu on left -->
     <div class="side-menu" [class.open]="openSideMenu">
       <button type="button" (click)="toggleSideMenu()" class="g-icon-button">
         <img src="assets/close.svg" alt="close">
@@ -14,14 +15,16 @@
         </li>
       </ul> 
     </div>
-    <!--------------------- Version PC --------------------->
-
+    <!--------------------- NAVBAR --------------------->
+    <!-- logo -->
     <a href="#" class="g-logo">no.clipped</a>
+    <!-- paths -->
     <ul class="hide-menu">
       <li *ngFor="let route of routes">
         <a [href]="route.path">{{route.name}}</a>
       </li>
     </ul> 
+    <!-- cart button -->
     <div class="cart">
     <button type="button">
       <img src="assets/cart.svg" alt="cart">

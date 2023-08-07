@@ -30,7 +30,7 @@
   top: 0;
   right: 0;
   width: 40%;
-  min-width: 320px;
+  min-width: 360px;
   height: 100%;
   background: var(--white);
   overflow-y: scroll;
@@ -40,10 +40,16 @@
   &.open {
     transform: translateX(0);
   }
-
+  button {
+    position: sticky;
+    top: 0;
+    background: var(--gray);
+    z-index: 2;
+  }
   .product-images{
     width: 100%;
-    position:relative;
+    padding: 0;
+    position: relative;
     top: -32px;
     aspect-ratio: 1/1;
     display: flex;
@@ -60,9 +66,18 @@
         height: 100%;
       }
     }
+    ::-webkit-scrollbar {
+      width: 1px;
+    }
   }
   .product-info {
-    padding: 1rem;
+    padding-inline: 1rem;
     background: var(--white);
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-block: 0.5rem;
+    }
   }
 }

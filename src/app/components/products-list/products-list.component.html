@@ -14,7 +14,7 @@
 </div>
 <!---------------------- QUICK VIEW SIDE PANEL ---------------------->
 <div class="product-detail" [class.open]="openProductDetails">
-  <button type="button" class="g-icon-button" (click)="closeProductDetails()">
+  <button type="button" class="g-icon-button" (click)="toggleProductDetails()">
     <img src="assets/close.svg" alt="close">
   </button>
   <!-- carrusel of images -->
@@ -25,7 +25,7 @@
   </div>
   <!-- product info -->
   <div class="product-info">
-    <h1>{{selectedProduct.title}}</h1>
+    <h2>{{selectedProduct.title}}</h2>
     <p>{{selectedProduct.description}}</p>
     <p>{{selectedProduct.price}}</p>
   </div>

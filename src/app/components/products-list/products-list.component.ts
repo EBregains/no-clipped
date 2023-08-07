@@ -14,7 +14,7 @@ export class ProductsListComponent {
   products: Product[] = [];
   selectedProduct: Product = emptyProduct;
 
-  // List Pageing sysytem
+  // List Paging sysytem
   page = 0;
   pageSize = 9;
   collectionSize = this.products.length;
@@ -22,32 +22,35 @@ export class ProductsListComponent {
   // booleans 
   openProductDetails = false; 
 
+
+
   loadMore() {
     this.page += 1;
     this.productsService.getFakeProductsOffset(this.pageSize, this.page * this.pageSize)
-      .subscribe((products) => {
-        this.products = this.products.concat(products);
-      });
+      .subscribe({
+        next: (products) => this.products = this.products.concat(products),
+        error: (err) => console.log(err),
+        complete: () => console.log('function loadMore() from product-list.c.ts complete')
+    });
   }
 
   addToShoppingCart(product: Product) {
     this.storeService.addToCart(product);
   }
 
-  closeProductDetails() {
-    this.openProductDetails = false;
-    this.selectedProduct = emptyProduct;
+  toggleProductDetails() {
+    this.openProductDetails = !this.openProductDetails;
   }
 
   onQuickView(id: string) {
     this.productsService.getFakeProduct(id)
-    .subscribe((product) => {
-      this.selectedProduct = product;
+    .subscribe({
+      next: (product) => {
+        this.selectedProduct = product;
+        this.toggleProductDetails();
+      }
     });
-    this.openProductDetails = true;
   }
-
-
 
   constructor(
     private storeService: StoreService,
@@ -58,9 +61,11 @@ export class ProductsListComponent {
 
   ngOnInit(): void {
     this.productsService.getFakeProductsOffset(this.pageSize, this.page * this.pageSize)
-      .subscribe((products) => {
-        console.log(products);
-          this.products = products;
-      });
+      .subscribe(
+        {
+          next: (products) => this.products = products,
+          error: (err) => console.log(err),
+          complete: () => console.log(' function ngOnInit() from product-list.c.ts complete')
+        });
   }
 }

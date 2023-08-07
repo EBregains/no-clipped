@@ -52,14 +52,15 @@ body {
 /* width */
 ::-webkit-scrollbar {
   width: 0px;
+  height: 3px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: none
+  background: var(--light-gray)
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: none
+  background: var(--contrast)
 }
