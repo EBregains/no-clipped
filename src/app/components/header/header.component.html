@@ -25,11 +25,20 @@
       </li>
     </ul> 
     <!-- cart button -->
-    <div class="cart">
-    <button type="button">
-      <img src="assets/cart.svg" alt="cart">
-      <span class="counter">{{numProductsOnCart}}</span>
-    </button>
+    <div class="cart-account">
+      <div class="account">
+        <img *ngIf="token; else ifNoToken" [src]="profile?.avatar">
+        <ng-template #ifNoToken>
+          <button (click)="login()" class="btn-primary">Log in</button>
+          <button (click)="getProfile()" class="btn-secondary">Sign up</button>
+        </ng-template>
+      </div>
+      <div class="cart">
+        <button type="button">
+          <img src="assets/cart.svg" alt="cart">
+          <span class="counter">{{numProductsOnCart}}</span>
+        </button>
+      </div>
     </div>
   </nav>
 </header>

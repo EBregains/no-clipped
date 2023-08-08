@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
 import { StoreService } from '../../services/store.service';
+import { AuthService } from '../../services/auth.service';
 
 import { Route } from '../../model/route.model';
+import { User } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-header',
@@ -16,12 +18,12 @@ export class HeaderComponent {
   numProductsOnCart = 0;
   routes: Route[] = [
     {
-      path: '/productos',
-      name: 'Productos',
+      path: '/men',
+      name: 'Hombres',
     },
     {
-      path: '/contacto',
-      name: 'Contacto',
+      path: '/boys',
+      name: 'Niños',
     },
     {
       path: '/acerca',
@@ -29,8 +31,13 @@ export class HeaderComponent {
     },
   ];
 
+  token: string = '';
+  profile: User | null = null;
+
+
   constructor (
     private storeService: StoreService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -41,5 +48,28 @@ export class HeaderComponent {
 
   toggleSideMenu() {
     this.openSideMenu = !this.openSideMenu;
+  }
+
+  login() {
+    this.authService.login('jhondoe@gmail.com', '12345')
+    .subscribe({
+      next: (auth) => {
+        this.token = auth.access_token
+        console.log(this.token);
+        console.log(auth.refresh_token);
+        
+      },
+      error: (err) => console.log(err),
+      complete: () => console.log('function login() from app.c.ts complete')
+    });
+  }
+
+  getProfile() {
+    this.authService.profile(this.token)
+    .subscribe({
+      next: (user) => console.log(user),
+      error: (err) => console.log(err),
+      complete: () => console.log('function getProfile() from app.c.ts complete')
+    });    
   }
 }
