@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { ProductsService } from '../../services/products.service';
 import { Product, emptyProduct } from '../../model/product.model';
@@ -10,30 +10,20 @@ import { Product, emptyProduct } from '../../model/product.model';
 })
 export class ProductsListComponent {
 
+  @Input() products: Product[] = [];
+  
+  @Output() onLoadMore: EventEmitter<string> = new EventEmitter<string>();
+
   shoppingCart: Product[] = [];
-  products: Product[] = [];
   selectedProduct: Product = emptyProduct;
-
-  // List Paging sysytem
-  page = 0;
-  pageSize = 9;
-  collectionSize = this.products.length;
-
+  
   // booleans 
   openProductDetails = false; 
 
-
-
-  loadMore() {
-    this.page += 1;
-    this.productsService.getFakeProducts(this.pageSize, this.page * this.pageSize)
-      .subscribe({
-        next: (products) => this.products = this.products.concat(products),
-        error: (err) => console.log(err),
-        complete: () => console.log('function loadMore() from product-list.c.ts complete')
-    });
+  loadMore(): void {
+    this.onLoadMore.emit();
   }
-
+  
   addToShoppingCart(product: Product) {
     this.storeService.addToCart(product);
   }
@@ -55,17 +45,5 @@ export class ProductsListComponent {
   constructor(
     private storeService: StoreService,
     private productsService: ProductsService,
-  ) {
-    
-  }
-
-  ngOnInit(): void {
-    this.productsService.getFakeProducts(this.pageSize, this.page * this.pageSize)
-      .subscribe(
-        {
-          next: (products) => this.products = products,
-          error: (err) => console.log(err),
-          complete: () => console.log(' function ngOnInit() from product-list.c.ts complete')
-        });
-  }
+  ) { }
 }

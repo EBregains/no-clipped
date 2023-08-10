@@ -14,27 +14,36 @@ import { checkTime } from '../interceptors/time.interceptor';
 })
 export class ProductsService {
 
-  private fakeAPIUrl = `${environment.API_URL}/api/v1/products`;
+  private fakeAPIUrl = `${environment.API_URL}/api/v1`;
   constructor(
     private http: HttpClient,
   ) { }
   
   getFakeProducts(quantity?: number, offset?: number) {
     let params = new HttpParams();
-    if (quantity && offset) {
-      params = params.set('limit', quantity.toString());
-      params = params.set('offset', offset.toString());
+    if (quantity && offset !== undefined) {
+      params = params.set('limit', quantity);
+      params = params.set('offset', offset);
     }
-    return this.http.get<Product[]>(`${this.fakeAPIUrl}`, { params, context: checkTime() });
+    return this.http.get<Product[]>(`${this.fakeAPIUrl}/products`, { params: params, context: checkTime() });
   }
 
   getFakeProduct(id: string) {
-    return this.http.get<Product>(`${this.fakeAPIUrl}/${id}`)
+    return this.http.get<Product>(`${this.fakeAPIUrl}/products/${id}`)
     .pipe(
       catchError((error: HttpErrorResponse) => {
         return this.handleErrors(error);
       })
     );
+  }
+
+  getByCategory(categoryId: string, quantity?: number, offset?: number) : Observable<Product[]>{
+    let params = new HttpParams();
+    if (quantity !== undefined && offset !== undefined) {
+      params = params.set('limit', quantity);
+      params = params.set('offset', offset);
+    }
+    return this.http.get<Product[]>(`${this.fakeAPIUrl}/categories/${categoryId}/products`, { params: params, context: checkTime() });
   }
 
 // ERROR HANDLER
