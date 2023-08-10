@@ -7,7 +7,7 @@
     <!-- side menu on left -->
     <div class="side-menu" [class.open]="openSideMenu">
       <button type="button" (click)="toggleSideMenu()" class="g-icon-button">
-        <img src="assets/close.svg" alt="close">
+        <img src="assets/close-black.svg" alt="close">
       </button>
       <ul>
         <li *ngFor="let route of routes">
@@ -27,10 +27,10 @@
     <!-- cart button -->
     <div class="cart-account">
       <div class="account">
-        <img *ngIf="token; else ifNoToken" [src]="profile?.avatar">
-        <ng-template #ifNoToken>
+        <p *ngIf="profile; else ifNoProfile">{{profile.email}}</p>
+        <ng-template #ifNoProfile>
           <button (click)="login()" class="btn-primary">Log in</button>
-          <button (click)="getProfile()" class="btn-secondary">Sign up</button>
+          <button class="btn-secondary">Sign up</button>
         </ng-template>
       </div>
       <div class="cart">

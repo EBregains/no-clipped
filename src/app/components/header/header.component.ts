@@ -19,19 +19,18 @@ export class HeaderComponent {
   routes: Route[] = [
     {
       path: '/men',
-      name: 'Hombres',
+      name: 'HOMBRE',
     },
     {
       path: '/boys',
-      name: 'Niños',
+      name: 'NIÑO',
     },
     {
-      path: '/acerca',
-      name: 'Conocenos',
+      path: '/about',
+      name: 'CONOCENOS',
     },
   ];
 
-  token: string = '';
   profile: User | null = null;
 
 
@@ -51,25 +50,11 @@ export class HeaderComponent {
   }
 
   login() {
-    this.authService.login('jhondoe@gmail.com', '12345')
+    this.authService.loginAndGet("maria@mail.com", '12345')
     .subscribe({
-      next: (auth) => {
-        this.token = auth.access_token
-        console.log(this.token);
-        console.log(auth.refresh_token);
-        
-      },
+      next: (profile) => { this.profile = profile },
       error: (err) => console.log(err),
-      complete: () => console.log('function login() from app.c.ts complete')
+      complete: () => console.log('function loginAndGetProfile() from app.c.ts complete')
     });
-  }
-
-  getProfile() {
-    this.authService.profile(this.token)
-    .subscribe({
-      next: (user) => console.log(user),
-      error: (err) => console.log(err),
-      complete: () => console.log('function getProfile() from app.c.ts complete')
-    });    
   }
 }

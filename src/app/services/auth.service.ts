@@ -5,7 +5,8 @@ import { User, UserDTO } from '../model/user.model';
 import { Auth } from '../model/auth.model';
 
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,19 +14,32 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   private APIUrl = `${environment.API_URL}/api/v1/auth`;
+
   constructor(
     private http: HttpClient,
+    private tokenService: TokenService,
   ) { }
 
   login(email: string, password: string): Observable<Auth> {
-    return this.http.post<Auth>(`${this.APIUrl}/login`, { email, password });
+    return this.http.post<Auth>(`${this.APIUrl}/login`, { email, password })
+    .pipe(
+      tap(response => this.tokenService.saveTokenLocal(response.access_token))
+    );
   }
 
-  profile(token: string): Observable<User> {
+  getProfile(): Observable<User> {
+
     return this.http.get<User>(`${this.APIUrl}/profile`, { 
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // }
      });
+  }
+
+  loginAndGet(email:string, password:string) {
+    return this.login(email, password)
+    .pipe(
+      switchMap(rta => this.getProfile())
+    )
   }
 }

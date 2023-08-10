@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 import { Product } from '../model/product.model';
 
 import { environment } from '../../environments/environment';
+
+import { checkTime } from '../interceptors/time.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,13 @@ export class ProductsService {
     private http: HttpClient,
   ) { }
   
-  getFakeProducts() {
-    return this.http.get<Product[]>(`${this.fakeAPIUrl}`);
+  getFakeProducts(quantity?: number, offset?: number) {
+    let params = new HttpParams();
+    if (quantity && offset) {
+      params = params.set('limit', quantity.toString());
+      params = params.set('offset', offset.toString());
+    }
+    return this.http.get<Product[]>(`${this.fakeAPIUrl}`, { params, context: checkTime() });
   }
 
   getFakeProduct(id: string) {
@@ -28,10 +35,6 @@ export class ProductsService {
         return this.handleErrors(error);
       })
     );
-  }
-
-  getFakeProductsOffset(quantity: number, offset: number) {
-    return this.http.get<Product[]>(`${this.fakeAPIUrl}?limit=${quantity}&offset=${offset}`);
   }
 
 // ERROR HANDLER

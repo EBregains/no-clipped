@@ -26,7 +26,7 @@ export class ProductsListComponent {
 
   loadMore() {
     this.page += 1;
-    this.productsService.getFakeProductsOffset(this.pageSize, this.page * this.pageSize)
+    this.productsService.getFakeProducts(this.pageSize, this.page * this.pageSize)
       .subscribe({
         next: (products) => this.products = this.products.concat(products),
         error: (err) => console.log(err),
@@ -60,7 +60,7 @@ export class ProductsListComponent {
   }
 
   ngOnInit(): void {
-    this.productsService.getFakeProductsOffset(this.pageSize, this.page * this.pageSize)
+    this.productsService.getFakeProducts(this.pageSize, this.page * this.pageSize)
       .subscribe(
         {
           next: (products) => this.products = products,
