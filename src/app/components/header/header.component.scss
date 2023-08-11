@@ -10,6 +10,7 @@ nav {
   padding-block: .5rem;
   padding-inline: 5%;
   background-color: var(--black);
+  z-index: 2;
   .sandwich-menu {
     display: none;
     border-radius: 4px;

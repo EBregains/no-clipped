@@ -23,20 +23,23 @@ export class CategoryComponent {
     ) { }
 
   ngOnInit(): void {
-    this.route.params
+    this.page = 0;
+    this.route.paramMap
     .pipe(
       switchMap(params =>{
-        this.categoryId = params['id'];
+        this.categoryId = params.get('id');
         if (this.categoryId) {
           return this.productsService.getByCategory(this.categoryId, this.pageSize, this.page * this.pageSize);
         }
         return [];
       })
-    ) 
+      )
     .subscribe({
       next: (data => {
         this.page += 1;
         this.products = data;
+        console.log('entra');
+        
       }),
       error: error => console.error(error),
       complete: () => console.log('Completed')
