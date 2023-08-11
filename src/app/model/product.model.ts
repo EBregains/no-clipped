@@ -9,20 +9,36 @@ export interface Product {
   creationAt: string;
   updateAt: string;
 }
-
 export const emptyProduct: Product = {
   id: '0',
-    title: 'default',
-    price: 0,
-    images: ['assets/image-not-found.png'],
-    description: 'default',
-    category: {
-      id: '-1',
-      name: 'default',
-      image: 'default',
-      creationAt: 'default',
-      updateAt: 'default',
-    },
+  title: 'default',
+  price: 0,
+  images: ['assets/image-not-found.png'],
+  description: 'default',
+  category: {
+    id: '-1',
+    name: 'default',
+    image: 'default',
     creationAt: 'default',
     updateAt: 'default',
+  },
+  creationAt: 'default',
+  updateAt: 'default',
 }
+
+// export const emptyProduct: Product = {
+//   id: '0',
+//     title: 'default',
+//     price: 0,
+//     image: 'assets/image-not-found.png',
+//     description: 'default',
+//     category: ""
+//   }
+// export interface Product {
+//   id: string;
+//   title: string;
+//   price: number;
+//   image: string;
+//   description: string;
+//   category: string;
+// }

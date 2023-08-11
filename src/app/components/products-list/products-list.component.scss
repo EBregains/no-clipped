@@ -10,8 +10,8 @@
 }
 
 .load-more {
-  width: 100px;
-  height: 180px;
+  width: 320px;
+  height: 430px;
   display: grid;
   place-items: center;
   button {
@@ -19,10 +19,14 @@
     height: 100%;
     margin: auto;
     font-size: 1.5rem;
-    color: var(--white);
-    background: var(--contrast);
-    border: none;
+    color: var(--gray);
+    background: var(--background);
+    border: 2px solid var(--gray);
     border-radius: 12px;
+    &:hover {
+      border-color: var(--contrast);
+      color: var(--contrast);
+    }
   }
 }
 

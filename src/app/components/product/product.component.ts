@@ -9,6 +9,7 @@ import { Product, emptyProduct } from '../../model/product.model';
 })
 export class ProductComponent {
 
+  // @Input() product: Product = emptyProduct;
   @Input() product: Product = emptyProduct;
 
   @Output() addedProduct = new EventEmitter<Product>();
