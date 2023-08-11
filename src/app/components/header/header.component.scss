@@ -19,13 +19,25 @@ nav {
   ul {
     display: flex;
     list-style: none;
-    width: 100%;
+    width: 87%;
     margin: 0;
+    overflow-x: hidden;
     li {
       margin: .5em;
       a {
         text-decoration: none;
         color: var(--white);
+        padding: .5rem;
+        &.ifActive {
+          border: 1px solid var(--contrast);
+          border-radius: 5px;
+          color: var(--contrast);
+        }
+        &:hover {
+          border: 1px solid var(--light-gray);
+          border-radius: 5px;
+          color: var(--light-gray);
+        }
       }
     }
   }
@@ -58,6 +70,11 @@ nav {
         a {
           text-decoration: none;
           color: var(--black);
+          &.ifActive {
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            color: var(--contrast);
+          }
         }
       }
     }

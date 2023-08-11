@@ -5,6 +5,8 @@ import { AuthService } from '../../services/auth.service';
 
 import { Route } from '../../model/route.model';
 import { User } from 'src/app/model/user.model';
+import { Category } from 'src/app/model/category.model';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-header',
@@ -31,18 +33,21 @@ export class HeaderComponent {
     },
   ];
 
+  categories: Category[] = [];
   profile: User | null = null;
 
 
   constructor (
     private storeService: StoreService,
     private authService: AuthService,
+    private categoriesService: CategoriesService,
   ) {}
 
   ngOnInit() {
     this.storeService.myCart$.subscribe((cart) => {
       this.numProductsOnCart = cart.length;
     });
+    this.getAllCategories();
   }
 
   toggleSideMenu() {
@@ -55,6 +60,15 @@ export class HeaderComponent {
       next: (profile) => { this.profile = profile },
       error: (err) => console.log(err),
       complete: () => console.log('function loginAndGetProfile() from app.c.ts complete')
+    });
+  }
+
+  getAllCategories() {
+    this.categoriesService.getCategories()
+    .subscribe({
+      next: (categories) => { this.categories = categories },
+      error: (err) => console.log(err),
+      complete: () => console.log('function getAllCategories() from app.c.ts complete')
     });
   }
 }

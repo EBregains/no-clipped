@@ -10,8 +10,8 @@
         <img src="assets/close-black.svg" alt="close">
       </button>
       <ul>
-        <li *ngFor="let route of routes">
-          <a [href]="route.path">{{route.name}}</a>
+        <li *ngFor="let category of categories">
+          <a routerLinkActive="ifActive" [routerLink]="['/category', category.id]">{{category.name}}</a>
         </li>
       </ul> 
     </div>
@@ -20,8 +20,8 @@
     <a href="#" class="g-logo">no.clipped</a>
     <!-- paths -->
     <ul class="hide-menu">
-      <li *ngFor="let route of routes">
-        <a [href]="route.path">{{route.name}}</a>
+      <li *ngFor="let category of categories">
+        <a routerLinkActive="ifActive" [routerLink]="['/category', category.id]">{{category.name}}</a>
       </li>
     </ul> 
     <!-- cart button -->
