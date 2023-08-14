@@ -27,7 +27,8 @@ body {
 }
 
 body {
-  margin-top: 6rem;
+  margin-top: 4rem;
+  height: calc(100% - 4rem);
 }
 
 .g-logo {
@@ -84,4 +85,11 @@ body {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--contrast)
+}
+
+@media screen and (max-width: 768px) {
+  body{
+    margin-top: 3rem;
+    height: calc(100% - 3rem);
+  }
 }

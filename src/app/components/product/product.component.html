@@ -7,12 +7,14 @@
   </div>
   <!-- details -->
   <div class="product-details">
-    <h2 class="product-name">{{product.title}}</h2>
-    <p class="product-price">{{product.price | currency}}</p>
-    <!-- button group -->
-    <div class="product-actions">
-      <button (click)="addToCart()">Add to cart</button>
-      <button (click)="viewQuickDetails()">Quick look</button>
+      <a href="product-detail/{{product.id}}">
+      <h2 class="product-name">{{product.title}}</h2>
+      </a>    
+      <p class="product-price">{{product.price | currency}}</p>
     </div>
+  <!-- button group -->
+  <div class="product-actions">
+    <button (click)="addToCart()">Add to cart</button>
+    <button (click)="viewQuickDetails()">Quick look</button>
   </div>
 </div>

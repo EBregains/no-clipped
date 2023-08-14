@@ -28,7 +28,7 @@ export class ProductsService {
     return this.http.get<Product[]>(`${this.fakeAPIUrl}/products`, { params: params, context: checkTime() });
   }
 
-  getFakeProduct(id: string) {
+  getFakeProduct(id: string) : Observable<Product> {
     return this.http.get<Product>(`${this.fakeAPIUrl}/products/${id}`)
     .pipe(
       catchError((error: HttpErrorResponse) => {
