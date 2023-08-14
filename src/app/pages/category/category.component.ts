@@ -37,12 +37,8 @@ export class CategoryComponent {
     .subscribe({
       next: (data => {
         this.page += 1;
-        this.products = data;
-        console.log('entra');
-        
-      }),
-      error: error => console.error(error),
-      complete: () => console.log('Completed')
+        this.products = data; 
+      })
     });  
   }
 
