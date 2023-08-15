@@ -1,27 +1,15 @@
 <div class="page-product">
-  <!-- <button>Back</button> -->
   <section>
     <div class="image-carrousel">
-      <div class="image">
-        <img src="assets/image-not-found.png" alt="product image">
-      </div>
-      <div class="image">
-        <img src="assets/image-not-found.png" alt="product image">
-      </div>
-      <div class="image">
-        <img src="assets/image-not-found.png" alt="product image">
-      </div>
-      <div class="image">
-        <img src="assets/image-not-found.png" alt="product image">
+      <div class="image" *ngFor="let image of product?.images">
+        <img [src]="image" alt="product image">
       </div>
     </div>
     <div class="product-detail">
-      <!-- <h2>{{product?.title}}</h2>
+      <button class="btn-primary" (click)="goBack()">« back</button>
+      <h2>{{product?.title}}</h2>
       <p>{{product?.description}}</p>
-      <p>{{product?.price | currency}}</p> -->
-      <h2>Product title</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-      <p>{{'100' | currency}}</p>
+      <p>{{product?.price | currency}}</p>
     </div>
   </section>
 </div>

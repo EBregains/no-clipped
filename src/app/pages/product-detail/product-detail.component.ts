@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { switchMap } from 'rxjs/operators';
+import { Location } from '@angular/common';
 import { Product } from 'src/app/model/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -17,6 +18,7 @@ export class ProductDetailComponent {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductsService,
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
@@ -32,5 +34,9 @@ export class ProductDetailComponent {
       ).subscribe((data) => {
         (this.product = data)
       })
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
