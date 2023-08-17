@@ -17,6 +17,9 @@ export class CategoryComponent {
   page = 0;
   pageSize = 10;
 
+  // Quick view query param
+  productId: string | null = null;
+
   constructor (
     private route: ActivatedRoute,
     private productsService: ProductsService,
@@ -40,6 +43,11 @@ export class CategoryComponent {
         this.products = data; 
       })
     });  
+    this.route.queryParamMap.subscribe(params => {
+      this.productId = params.get('product');
+      console.log(this.productId);
+      
+    });
   }
 
   loadMore() {

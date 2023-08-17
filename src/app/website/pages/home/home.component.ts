@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/model/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -14,6 +15,9 @@ export class HomeComponent {
   page = 0;
   pageSize = 9;
   collectionSize = this.products.length;
+
+  // Quick view query param
+  productId: string | null = null;  
   
   loadMore() {
     this.productsService.getFakeProducts(this.pageSize, this.page * this.pageSize)
@@ -28,7 +32,8 @@ export class HomeComponent {
   }
 
   constructor(
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -39,5 +44,9 @@ export class HomeComponent {
           error: (err) => console.log(err),
           complete: () => console.log(' function ngOnInit() from product-list.c.ts complete')
         });
+    this.route.queryParamMap.subscribe(params => {
+      this.productId = params.get('product');
+      
+    });
   }
 }

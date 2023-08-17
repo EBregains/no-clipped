@@ -57,7 +57,7 @@ export class ProductsService {
       case HttpStatusCode.InternalServerError:
         return throwError(() => new Error('Internal Server Error. Please try again later.'));
       default:
-        return throwError(() => new Error('Something went wrong.'));
+        return throwError(() => new Error(`Something went wrong. ${error.message}}`));
     }
   }
 }

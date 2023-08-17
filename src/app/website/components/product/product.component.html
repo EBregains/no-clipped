@@ -14,7 +14,8 @@
     </div>
   <!-- button group -->
   <div class="product-actions">
+    <a routerLink="." [queryParams]="{product: product.id}">Quick Look</a>
     <button (click)="addToCart()">Add to cart</button>
-    <button (click)="viewQuickDetails()">Quick look</button>
+    <!-- <button (click)="viewQuickDetails()">Quick look</button> -->
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { StoreService } from '../../services/store.service';
-import { ProductsService } from '../../services/products.service';
-import { Product, emptyProduct } from '../../model/product.model';
+import { StoreService } from '../../../services/store.service';
+import { ProductsService } from '../../../services/products.service';
+import { Product, emptyProduct } from '../../../model/product.model';
 
 @Component({
   selector: 'app-products-list',
@@ -11,6 +11,11 @@ import { Product, emptyProduct } from '../../model/product.model';
 export class ProductsListComponent {
 
   @Input() products: Product[] = [];
+  @Input() set optProductId(id:string|null) {
+    if (id) {
+      this.onQuickView(id);
+    }
+  };
   
   @Output() onLoadMore: EventEmitter<string> = new EventEmitter<string>();
 
@@ -33,6 +38,7 @@ export class ProductsListComponent {
   }
 
   onQuickView(id: string) {
+    if(this.optProductId) this.openProductDetails = true;
     this.productsService.getFakeProduct(id)
     .subscribe({
       next: (product) => {
