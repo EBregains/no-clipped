@@ -5,6 +5,7 @@ import { CategoryRoutingModule } from './category-routing.module';
 
 import { CategoryComponent } from './category.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     CategoryRoutingModule,
-    SharedModule
+    SharedModule,
+    QuicklinkModule
   ]
 })
 export class CategoryModule { }

@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { TimeInterceptor } from './interceptors/time.interceptor';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NotFoundComponent } from './website/pages/not-found/not-found.component';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NotFoundComponent } from './website/pages/not-found/not-found.component
     BrowserModule,
     AppRoutingModule,
     FormsModule, // <-- import the FormsModule before binding with [(ngModel)]
-    HttpClientModule
+    HttpClientModule,
+    QuicklinkModule
   ],
   providers: [
     {

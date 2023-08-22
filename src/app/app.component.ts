@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
+import { TokenService } from './services/token.service';
+
 
 @Component({
   selector: 'app-root',
@@ -16,7 +18,15 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private usersService: UsersService,
+    private tokenService: TokenService,
   ) {}
+
+  ngOnInit() {
+    const token = this.tokenService.getTokenLocal();
+    if (token) {
+      this.authService.getProfile().subscribe();
+    }
+  }
 
   createUser() {
     this.usersService.create({

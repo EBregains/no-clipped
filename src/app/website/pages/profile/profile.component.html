@@ -1,1 +1,7 @@
-<p>profile works!</p>
+<div *ngIf="user">
+  <h2>{{user.name}}</h2>
+  <p>{{user.email}}</p>
+  <p>{{user.role}}</p>
+  <img [src]="user.avatar" alt="profile pic">
+  <a routerLink="/cms" *ngIf="user.role === 'admin'">Ir al CMS</a>
+</div>

@@ -27,10 +27,11 @@
     <!-- cart button -->
     <div class="cart-account">
       <div class="account">
-        <p *ngIf="profile; else ifNoProfile">{{profile.email}}</p>
-        <ng-template #ifNoProfile>
-          <button (click)="login()" class="btn-primary">Log in</button>
-          <button class="btn-secondary">Sign up</button>
+        <button *ngIf="!profile; else ifProfile" (click)="login()" class="btn-primary">Log in</button>
+        <button *ngIf="!profile" class="btn-secondary">Sign up</button>
+        <ng-template #ifProfile>
+          <a routerLink="/profile">{{profile?.email}}</a>
+          <button (click)="logout()" class="btn-secondary">Logout</button>
         </ng-template>
       </div>
       <div class="cart">
