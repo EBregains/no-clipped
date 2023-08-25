@@ -90,6 +90,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 1rem;
+    font-size: 1rem;
     .account {
       display: flex;
       align-items: center;
@@ -102,18 +103,20 @@ nav {
       a {
         color: var(--white);
         text-decoration: none;
+
       }
     }
     .cart {
       height: 32px;
       border: none;
-      padding: 0;
+      padding-left: 10px;
       border-left: 1px solid var(--white);
-      button{
+      a{
         width: 100%;
         background: none;
         border: none;
         cursor: pointer;
+        text-decoration: none;
         img {
           width: 28px;
           height: 28px;

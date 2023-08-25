@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  loginForm = this.formBuilder.group({
+    email: [''],
+    password: ['']
+  });
+
+  onSubmit(): void {
+    console.log('Your form data : ', this.
+    loginForm.value);
+  }
+
+  constructor ( 
+    private formBuilder: FormBuilder,
+  ) { }
 }

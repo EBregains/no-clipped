@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { StoreService } from '../../../services/store.service';
 import { AuthService } from '../../../services/auth.service';
@@ -16,7 +16,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   
   openSideMenu = false;
   numProductsOnCart = 0;

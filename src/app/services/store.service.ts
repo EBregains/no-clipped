@@ -22,4 +22,14 @@ export class StoreService {
   get getTotal() {
     return this.shoppingCart.reduce((acc, curr) => acc + curr.price, 0);
   }
+
+  removeProductFromCart(index: number) {
+    this.shoppingCart.splice(index, 1);
+    this.myCart.next(this.shoppingCart);
+  }
+
+  emptyCart() {
+    this.shoppingCart = [];
+    this.myCart.next(this.shoppingCart);
+  }
 }

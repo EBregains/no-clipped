@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { OnExit } from 'src/app/guards/exit.guard';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +9,28 @@ import { OnExit } from 'src/app/guards/exit.guard';
 })
 export class RegisterComponent implements OnExit{
 
-  constructor () {}
+  registerForm = this.formBuilder.group({
+    email: [''],
+    name: [''],
+    lastName: [''],
+    phone: [''],
+    address: this.formBuilder.group({
+      street: [''],
+      city: [''],
+      province: [''],
+      zip: ['']
+    }),
+    password: [''],
+    confirmPassword: ['']
+  });
+
+  onSubmit(): void {
+    console.log('Your form data : ', this.registerForm.value);
+  }
+
+  constructor (
+    private formBuilder: FormBuilder,
+  ) {}
    
   onExit() {
     const rta = confirm('¿Estás seguro de salir?');

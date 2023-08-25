@@ -27,18 +27,18 @@
     <!-- cart button -->
     <div class="cart-account">
       <div class="account">
-        <button *ngIf="!profile; else ifProfile" (click)="login()" class="btn-primary">Log in</button>
-        <button *ngIf="!profile" class="btn-secondary">Sign up</button>
+        <a href="/login" *ngIf="!profile; else ifProfile" class="btn-primary">Log in</a>
+        <a href="/register" *ngIf="!profile" class="btn-secondary">Sign up</a>
         <ng-template #ifProfile>
           <a routerLink="/profile">{{profile?.email}}</a>
           <button (click)="logout()" class="btn-secondary">Logout</button>
         </ng-template>
       </div>
       <div class="cart">
-        <button type="button">
+        <a href="/my-cart">
           <img src="assets/cart.svg" alt="cart">
           <span class="counter">{{numProductsOnCart}}</span>
-        </button>
+        </a>
       </div>
     </div>
   </nav>
